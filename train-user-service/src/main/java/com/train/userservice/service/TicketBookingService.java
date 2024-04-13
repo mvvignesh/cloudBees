@@ -49,4 +49,9 @@ public class TicketBookingService {
 		Optional<Ticket> ticket = ticketRepo.findById(receiptId);
 		return new ResponseEntity<>(ticket, HttpStatus.OK);
 	}
+
+	public ResponseEntity<String> deleteTicket (Long receiptId ) {
+		ticketRepo.deleteById(receiptId);
+		return new ResponseEntity<String>("Success", HttpStatus.ACCEPTED);
+	}
 }

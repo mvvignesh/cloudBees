@@ -1,6 +1,7 @@
 package com.train.userservice;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -53,6 +54,13 @@ public class TicketBookingServiceTest {
 	public void getTicketDetails() {
 		when(ticketRepo.findById(getTicketMock().getId())).thenReturn(Optional.of(getTicketMock()));
 		assertEquals(HttpStatus.OK, bookingService.getTicketDetails(getTicketMock().getId()).getStatusCode());
+	}
+
+	@Test
+	public void deleteTicket() {
+		doNothing().when(ticketRepo).deleteById(getTicketMock().getId());
+
+		assertEquals(HttpStatus.ACCEPTED, bookingService.deleteTicket(getTicketMock().getId()).getStatusCode());
 	}
 
 	public Ticket getTicketMock() {

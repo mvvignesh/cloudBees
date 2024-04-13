@@ -61,6 +61,11 @@ public class TrainUserServiceControllerTest {
 		assertEquals(HttpStatus.OK, ticketBookingController.getTicketDetails(getTicketMock().getId()).getStatusCode());
 	}
 
+	@Test
+	public void deleteTicket () {
+		when(ticketBookingService.deleteTicket(getTicketMock().getId())).thenReturn(new ResponseEntity<String>("Success", HttpStatus.ACCEPTED));
+		assertEquals("Success", ticketBookingController.deleteTicket(getTicketMock().getId()).getBody());
+	}
 	public static Ticket getTicketMock() {
 		User u = new User(1, "name", "name", "name@gmail.com");
 		Ticket t = new Ticket(1, "London", "France", 5, "Section A", u);
